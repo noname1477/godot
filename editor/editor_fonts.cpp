@@ -5,8 +5,8 @@
 /*                           GODOT ENGINE                                */
 /*                      https://godotengine.org                          */
 /*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2007-2019 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2019 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -64,7 +64,7 @@
 	Ref<DynamicFont> m_name;                                    \
 	m_name.instance();                                          \
 	m_name->set_size(m_size);                                   \
-	if (CustomFontBold.is_valid()) {                            \
+	if (CustomFont.is_valid()) {                                \
 		m_name->set_font_data(CustomFontBold);                  \
 		m_name->add_fallback(DefaultFontBold);                  \
 	} else {                                                    \
@@ -232,7 +232,6 @@ void editor_register_fonts(Ref<Theme> p_theme) {
 	// Default font
 	MAKE_DEFAULT_FONT(df, default_font_size);
 	p_theme->set_default_theme_font(df);
-	p_theme->set_font("main", "EditorFonts", df);
 
 	// Bold font
 	MAKE_BOLD_FONT(df_bold, default_font_size);
@@ -243,10 +242,10 @@ void editor_register_fonts(Ref<Theme> p_theme) {
 	p_theme->set_font("title", "EditorFonts", df_title);
 
 	// Documentation fonts
-	MAKE_DEFAULT_FONT(df_doc, (default_font_size + 1) * EDSCALE);
-	MAKE_BOLD_FONT(df_doc_bold, (default_font_size + 1) * EDSCALE);
-	MAKE_BOLD_FONT(df_doc_title, (2 * default_font_size - 1) * EDSCALE);
-	MAKE_SOURCE_FONT(df_doc_code, default_font_size * EDSCALE);
+	MAKE_DEFAULT_FONT(df_doc, int(EDITOR_GET("text_editor/help/help_font_size")) * EDSCALE);
+	MAKE_BOLD_FONT(df_doc_bold, int(EDITOR_GET("text_editor/help/help_font_size")) * EDSCALE);
+	MAKE_BOLD_FONT(df_doc_title, int(EDITOR_GET("text_editor/help/help_title_font_size")) * EDSCALE);
+	MAKE_SOURCE_FONT(df_doc_code, int(EDITOR_GET("text_editor/help/help_source_font_size")) * EDSCALE);
 	p_theme->set_font("doc", "EditorFonts", df_doc);
 	p_theme->set_font("doc_bold", "EditorFonts", df_doc_bold);
 	p_theme->set_font("doc_title", "EditorFonts", df_doc_title);
